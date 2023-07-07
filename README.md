@@ -1,24 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| nickname           | string     | null: false                    |
+| email              | string     | null: false, unique: true      |
+| encrypted_password | string     | null: false                    |
+| gender_id          | integer    | null: false                    |
+| age                | integer    | null: false                    |
+| height             | integer    | null: false                    |
+| weight             | integer    | null: false                    |
+| level_id           | integer    | null: false                    |
+| essential_cal      | integer    | null: false                    |
 
-Things you may want to cover:
+### Association
+- has_many :calendars
+- has_many :foods
+- extend ActiveHash::Associations::ActiveRecordExtensions
+-   belongs_to :gender
+-   belongs_to :level
 
-* Ruby version
+## foodsテーブル
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| name               | string     | null: false                    |
+| protein            | integer    | null: false                    |
+| fat                | integer    | null: false                    |
+| carbohydrate       | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* System dependencies
+### Association
+- belongs_to :user
+- has_many :calendars, through: :calender_foods
+- has_one_attached :image
 
-* Configuration
+## calendarsテーブル
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| date               | date       | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_many :foods, through: :calender_foods
 
-* Database initialization
+## calendar_foodsテーブル
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| calendar           | references | null: false, foreign_key: true |
+| food               | references | null: false, foreign_key: true |
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :calendar
+- belongs_to :food
