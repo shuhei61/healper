@@ -16,5 +16,9 @@ class User < ApplicationRecord
     validates :gender_id
     validates :level_id
   end
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :gender
+  belongs_to :level
   
 end
