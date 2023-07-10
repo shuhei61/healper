@@ -1,3 +1,36 @@
 <%= render partial:"shared/header"%>
 
 <h2>スケジュール</h2>
+<% if user_signed_in? %>
+<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
+<div class="contents">
+  <%= @calendars.each do |calendar|%>
+  <div class="content-box">
+    <div class="content-top">日付</div>
+    <div class="content-btm">内容
+      <div class="content-food">food1</div>
+      <div class="content-food">food2</div>
+      <div class="content-food">food3</div>
+      <div class="content-food">food4</div>
+      <div class="content-food">food5</div>
+      <div class="content-food">food6</div>
+      <div class="content-food">food7</div>
+      <div class="content-food">food8</div>
+      <div class="content-food">food9</div>
+      <div class="content-food">food10</div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<p>・減量を目指す場合</p>
+<p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>
+<p>  週に0.5kgを目指す場合、週に3850kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 550 %>kcalに抑えましょう。</p>
+<p>  週に1kgを目指す場合、週に7700kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 1100 %>kcalに抑えましょう。</p>
+<p>※減量の場合、脂肪を落とすことがメインと考えると、1kgの脂肪=7700kcalのため。</p>
+<%# <p></p>
+<p>・増量を目指す場合</p>
+<p>一般的な目安として、週に0.25kgから0.5kg程度を目指すと良いでしょう。</p>
+<p>  週に0.25kgを目指す場合、週に3850kcal、一日当たり550kcal減らしましょう。</p>
+<p>  週に0.5kgを目指す場合、週に7700kcal、一日当たり1100kcal減らしましょう。</p>
+<p>※同じカロリーでも、タンパク質を優先して摂ると良いでしょう。</p> %>
+<% end %>
