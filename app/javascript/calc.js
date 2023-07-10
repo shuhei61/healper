@@ -43,10 +43,8 @@ const calculateCalories = () => {
     // 必要なカロリーを計算
     var bmr = calculateBMR(gender, age, height, weight);
     var calories = Math.round(bmr * level);
-    console.log(calories)  
     const caloriesObj = `<input value=${calories} name='user[essential_cal]' type="hidden">`;
     form.insertAdjacentHTML("beforeend", caloriesObj);
-    console.log(caloriesObj)
     form.submit();
     e.preventDefault();
   });
