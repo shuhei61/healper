@@ -20,6 +20,26 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
   end
 
+  def edit
+    @food = Food.find(params[:id])
+  end
+
+  def update
+    @food = Food.find(params[:id])
+    if @food.update(create_food)
+      redirect_to "/foods/#{@food.id}"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @food = Food.find(params[:id])
+    @food.destroy
+    redirect_to "/foods"
+  end
+
+
   private
   def create_food
     params.require(:food).permit(:name,:protein,:fat,:carbohydrate).merge(user_id:current_user.id)

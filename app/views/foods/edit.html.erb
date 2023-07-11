@@ -1,0 +1,5 @@
+<%= render partial:"/shared/food_new", locals:{food: @food}%>
+
+<div><%= link_to "トップページに戻る","/" %></div>
+<div><%= link_to "料理一覧に戻る","/foods" %></div>
+<div><%= link_to "料理詳細に戻る","/foods/#{@food.id}" %></div>

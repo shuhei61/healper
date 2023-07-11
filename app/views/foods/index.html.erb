@@ -1,3 +1,5 @@
 <% @foods.each do |food| %>
 <div><%=link_to food.name,"/foods/#{food.id}"%></div>
 <% end %>
+
+<div><%= link_to "トップページに戻る","/" %></div>
