@@ -30,9 +30,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
 
   create_table "foods", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "protein", null: false
-    t.integer "fat", null: false
-    t.integer "carbohydrate", null: false
+    t.float "protein", null: false
+    t.float "fat", null: false
+    t.float "carbohydrate", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
     t.string "encrypted_password", default: "", null: false
     t.integer "gender_id", null: false
     t.integer "age", null: false
-    t.integer "height", null: false
-    t.integer "weight", null: false
+    t.float "height", null: false
+    t.float "weight", null: false
     t.integer "level_id", null: false
     t.integer "essential_cal", null: false
     t.string "reset_password_token"
