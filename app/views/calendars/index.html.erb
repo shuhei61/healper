@@ -1,30 +1,34 @@
-<%= render partial:"shared/header"%>
-
 <% if user_signed_in? %>
 <div><%=link_to "料理の登録はこちら","/foods/new"%></div>
 <div><%= link_to "料理一覧はこちら","/foods" %></div>
 
 <h2>スケジュール</h2>
-<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
-<div class="contents">
-  <% @calendars.each do |calendar|%>
-  <div class="content-box">
-    <div class="content-top">日付</div>
-    <div class="content-btm">内容
-      <div class="content-food">food1</div>
-      <div class="content-food">food2</div>
-      <div class="content-food">food3</div>
-      <div class="content-food">food4</div>
-      <div class="content-food">food5</div>
-      <div class="content-food">food6</div>
-      <div class="content-food">food7</div>
-      <div class="content-food">food8</div>
-      <div class="content-food">food9</div>
-      <div class="content-food">food10</div>
+<%= form_with( model: @calendar, local: true, class: 'form') do |f| %>
+  <%= f.label :日付を選択, class: 'lavel' %>
+  <%= f.date_field :date, class: 'date-select' %>
+  <%= f.label :食べた料理を選択, class: 'lavel' %>
+  <%= f.text_field :plan, class: 'text-input' %>
+  <%= f.submit '保存' %>
+<% end %>
+<div class='calendar'>
+  <% @week_days.each do |day| %>
+  <div class='item'>
+    <div class='date'>
+      <%= day[:month] %>/<%= day[:date] %><%= day[:wday] %>
     </div>
+    <ul class='content'>
+    <% if day[:plans].length != 0 %>
+      <% day[:plans].each do |plan| %>
+        <li class='plan-list'>・<%= plan %></li>
+      <% end %>
+    <% end %>
+    </ul>
   </div>
   <% end %>
 </div>
+
+<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
+
 <p>・減量を目指す場合</p>
 <p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>
 <p>  週に0.5kgを目指す場合、週に3850kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 550 %>kcalに抑えましょう。</p>
