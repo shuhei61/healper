@@ -17,6 +17,7 @@ class User < ApplicationRecord
     validates :level_id
   end
 
+  has_many :foods
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :gender
   belongs_to :level

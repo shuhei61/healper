@@ -6,4 +6,8 @@ class Food < ApplicationRecord
     validates :fat, numericality: { allow_float: true }
     validates :carbohydrate, numericality: { allow_float: true }
   end
+
+  has_many :calendar_foods
+  has_many :calendars, through: :calendar_foods
+  belongs_to :user
 end

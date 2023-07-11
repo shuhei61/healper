@@ -1,0 +1,2 @@
+class CalendarFood < ApplicationRecord
+end
