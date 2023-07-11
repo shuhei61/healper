@@ -6,10 +6,10 @@ class User < ApplicationRecord
   
   with_options presence: true do
     validates :nickname
-    validates :age
-    validates :height
-    validates :weight
-    validates :essential_cal
+    validates :age, numericality: { only_integer: true }
+    validates :height, numericality: { allow_float: true }
+    validates :weight, numericality: { allow_float: true }
+    validates :essential_cal, numericality: { only_integer: true }
   end
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
