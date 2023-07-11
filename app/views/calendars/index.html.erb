@@ -1,7 +1,8 @@
 <%= render partial:"shared/header"%>
 
 <% if user_signed_in? %>
-<div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
+<div><%=link_to "料理の登録はこちら","/foods/new"%></div>
+<div><%= link_to "料理一覧はこちら","/foods" %></div>
 
 <h2>スケジュール</h2>
 <h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>

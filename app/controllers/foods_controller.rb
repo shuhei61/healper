@@ -16,6 +16,10 @@ class FoodsController < ApplicationController
     end
   end
 
+  def show
+    @food = Food.find(params[:id])
+  end
+
   private
   def create_food
     params.require(:food).permit(:name,:protein,:fat,:carbohydrate).merge(user_id:current_user.id)
