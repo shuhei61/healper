@@ -1,10 +1,12 @@
 <%= render partial:"shared/header"%>
 
-<h2>スケジュール</h2>
 <% if user_signed_in? %>
+<div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
+
+<h2>スケジュール</h2>
 <h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
 <div class="contents">
-  <%= @calendars.each do |calendar|%>
+  <% @calendars.each do |calendar|%>
   <div class="content-box">
     <div class="content-top">日付</div>
     <div class="content-btm">内容
@@ -33,4 +35,6 @@
 <p>  週に0.25kgを目指す場合、週に3850kcal、一日当たり550kcal減らしましょう。</p>
 <p>  週に0.5kgを目指す場合、週に7700kcal、一日当たり1100kcal減らしましょう。</p>
 <p>※同じカロリーでも、タンパク質を優先して摂ると良いでしょう。</p> %>
+<% else %>
+<h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2>
 <% end %>

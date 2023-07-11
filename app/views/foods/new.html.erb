@@ -1,0 +1,11 @@
+<%= form_with(model: @food, local: true) do |form| %>
+  <label>料理名</label>
+  <div><%= form.text_field :name, placeholder: "例) 天ぷらうどん" %></div>
+  <label>たんぱく質</label>
+  <div><%= form.text_field :protein, placeholder: "例) 18.9" %>g</div>
+  <label>脂質</label>
+  <div><%= form.text_field :fat, placeholder: "例) 7" %>g</div>
+  <label>炭水化物</label>
+  <div><%= form.text_field :carbohydrate, placeholder: "例) 54.3" %>g</div>
+  <div><%= form.submit "送信" %></div>
+<% end %>
