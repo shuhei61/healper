@@ -7,7 +7,7 @@
   <%= f.label :日付を選択, class: 'lavel' %>
   <%= f.date_field :date, class: 'date-select' %>
   <%= f.label :食べた料理を選択, class: 'lavel' %>
-  <%= f.text_field :plan, class: 'text-input' %>
+  <%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true }) %>
   <%= f.submit '保存' %>
 <% end %>
 <div class='calendar'>
@@ -19,7 +19,7 @@
     <ul class='content'>
     <% if day[:plans].length != 0 %>
       <% day[:plans].each do |plan| %>
-        <li class='plan-list'>・<%= plan %></li>
+        <li class='plan-list'>・<%= plan.name %></li>
       <% end %>
     <% end %>
     </ul>
