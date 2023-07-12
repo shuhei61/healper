@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
     t.float "protein", null: false
     t.float "fat", null: false
     t.float "carbohydrate", null: false
+    t.integer "calorie", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

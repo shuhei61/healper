@@ -4,7 +4,7 @@
   <%= link_to "削除する","/foods/#{@food.id}", data:{turbo_method: :delete} %>
 </div>
 
-<h3>カロリー：<%=(@food.protein*4 + @food.fat*9 + @food.carbohydrate*4).round %> kcal</h3>
+<h3>カロリー：<%=@food.calorie %> kcal</h3>
 <div>たんぱく質：<%=@food.protein%> g</div>
 <div>脂質　　　：<%=@food.fat%> g</div>
 <div>炭水化物　：<%=@food.carbohydrate%> g</div>

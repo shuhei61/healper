@@ -38,12 +38,19 @@ body {
   overflow: scroll;
 }
 
-.protein,.fat,.carbohydrate{
+.calorie,.protein,.fat,.carbohydrate{
   margin: 1px;
   border: 1px solid orange;
   background-color: rgb(251, 251, 230);
   border-radius: 5px;
   padding: 5px;
+  text-align: center;
+}
+
+.calorie{
+  font-weight: 600;
+  border: 1px solid red;
+  background-color: rgb(255, 200, 200);
 }
 
 .protein{

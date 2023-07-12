@@ -5,6 +5,7 @@ class CreateFoods < ActiveRecord::Migration[7.0]
       t.float :protein, null: false
       t.float :fat, null: false
       t.float :carbohydrate, null: false
+      t.integer :calorie, null: false
       t.references :user, null: false, foreign_key: true
       t.timestamps
     end

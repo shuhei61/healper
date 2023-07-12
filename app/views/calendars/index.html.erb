@@ -23,11 +23,13 @@
       <% end %>
     <% end %>
     </ul>
-    <%# <div class='carolie'>
-      <% carolie = 0 %>
-      <%# <% day[:plans].each do |plan| %>
-        <%# <% carolie += plan.protein %>
-    <%# </div> %>
+    <div class='calorie'>
+      <% calorie = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% calorie += plan.calorie %>
+      <% end %>
+      <div><%= calorie %>kcal</div>
+    </div>
     <div class='protein'>
       <% protein = 0 %>
       <% day[:plans].each do |plan| %>
