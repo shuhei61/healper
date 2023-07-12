@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
     t.float "weight", null: false
     t.integer "level_id", null: false
     t.integer "essential_cal", null: false
+    t.float "fat_body", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

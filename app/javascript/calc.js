@@ -44,7 +44,10 @@ const calculateCalories = () => {
     var bmr = calculateBMR(gender, age, height, weight);
     var calories = Math.round(bmr * level);
     const caloriesObj = `<input value=${calories} name='user[essential_cal]' type="hidden">`;
+    var fat_body = calculateFat_body(gender, age, height, weight);
+    const fat_bodyObj = `<input value=${fat_body} name='user[fat_body]' type="hidden">`;
     form.insertAdjacentHTML("beforeend", caloriesObj);
+    form.insertAdjacentHTML("beforeend", fat_bodyObj);
     form.submit();
     e.preventDefault();
   });
@@ -61,6 +64,18 @@ function calculateBMR(gender, age, height, weight) {
   };
 
   return bmr;
+};
+
+function calculateFat_body(gender, age, height, weight) {
+  var fat_body = 0;
+
+  if (gender === 'male') {
+    fat_body = (1.20 * ( weight / (height/100 * height/100))) + (0.23 * age) - 16.2;
+  } else if (gender === 'female') {
+    fat_body = (1.20 * ( weight / (height/100 * height/100))) + (0.23 * age) - 5.4;
+  };
+
+  return fat_body;
 };
   
 

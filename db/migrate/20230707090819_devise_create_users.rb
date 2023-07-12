@@ -13,6 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.float :weight, null: false
       t.integer :level_id, null: false
       t.integer :essential_cal, null: false
+      t.float :fat_body, null: false
 
       ## Recoverable
       t.string   :reset_password_token
