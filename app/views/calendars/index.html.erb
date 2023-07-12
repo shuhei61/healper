@@ -3,14 +3,44 @@
 <div><%= link_to "料理一覧はこちら","/foods" %></div>
 
 <h2>スケジュール</h2>
-<%= form_with( model: @calendar, local: true, class: 'form') do |f| %>
-  <%= f.label :日付を選択, class: 'lavel' %>
-  <%= f.date_field :date, class: 'date-select' %>
-  <%= f.label :食べた料理を選択, class: 'lavel' %>
-  <%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true }) %>
-  <%= f.submit '保存' %>
-<% end %>
+<% wants_calorie = @user.essential_cal %>
+<% wants_protein = 0 %>
+<% wants_fat = 0 %>
+<% wants_carbohydrate = 0 %>
+
+<div class="form">
+  <div class="wants-box">
+    <div class="wants">
+      <div><%= @user.nickname %>さんの、1日あたりの目安</div>
+      <div>通常</div>
+      <div class='calorie'><label>必須カロリー</label><div><%=@user.essential_cal %>kcal</div></div>
+      <div class='protein'><label>たんぱく質</label><div><%=(@user.essential_cal * 0.13 / 4).round %> ～ <%=(@user.essential_cal * 0.20 / 4).round %>g</div></div>
+      <div class='fat'><label>脂質</label><div><%=(@user.essential_cal * 0.2 / 9).round %> ～ <%=(@user.essential_cal * 0.3 / 9).round %>g</div></div>
+      <div class='carbohydrate'><label>炭水化物</label><div><%=(@user.essential_cal * 0.5 / 4).round %> ～ <%=(@user.essential_cal * 0.65 / 4).round %>g</div></div>
+    </div>
+    <div class="wants">
+      <div>ダイエット</div>
+      <div class='calorie'><label>必須カロリー</label><div><%=@user.essential_cal %>kcal</div></div>
+      <div class='protein'><label>たんぱく質</label><div><%=(@user.essential_cal * 0.13 / 4).round %> ～ <%=(@user.essential_cal * 0.20 / 4).round %>g</div></div>
+      <div class='fat'><label>脂質</label><div><%=(@user.essential_cal * 0.2 / 9).round %> ～ <%=(@user.essential_cal * 0.3 / 9).round %>g</div></div>
+      <div class='carbohydrate'><label>炭水化物</label><div><%=(@user.essential_cal * 0.5 / 4).round %> ～ <%=(@user.essential_cal * 0.65 / 4).round %>g</div></div>
+    </div>
+  </div>
+  <div>
+    <%= form_with( model: @calendar, local: true) do |f| %>
+      <div>日付を選択
+      <%= f.date_field :date, class: 'date-select' %></div>
+      <div>食べた料理を選択</div>
+      <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true }) %></div>
+      <div><%= f.submit '保存' %></div>
+    <% end %>
+  </div>
+</div>
 <div class='calendar'>
+  <% sum_calorie = 0 %>
+  <% sum_protein = 0 %>
+  <% sum_fat = 0 %>
+  <% sum_carbohydrate = 0 %>
   <% @week_days.each do |day| %>
   <div class='item'>
     <div class='date'>
@@ -52,10 +82,44 @@
       <label>炭水化物</label><div><%= carbohydrate %>g</div>
     </div>
   </div>
+  <% sum_calorie += calorie %>
+  <% sum_protein += protein %>
+  <% sum_fat += fat %>
+  <% sum_carbohydrate += carbohydrate %>
   <% end %>
 </div>
 
-<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>kcalです。</h2>
+<% t = 0 %>
+<% @week_days.each do |day| %>
+  <% if day[:plans].length != 0%>
+    <% t += 1 %>
+  <% end %>
+<% end %>
+<div class="form">
+  <div class="sum">
+    <div>【<%= t %>日間の合計】</div>
+    <div class='calorie'><label>カロリー</label><div><%=sum_calorie %>kcal</div></div>
+    <div class='protein'><label>たんぱく質</label><div><%=sum_protein%>g</div></div>
+    <div class='fat'><label>脂質</label><div><%=sum_fat %>g</div></div>
+    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate %>g</div></div>
+  </div>
+  <div class="sum">
+    <div>【<%= t %>日間の目安】</div>
+    <div class='calorie'><label>カロリー</label><div><%=wants_calorie * t %>kcal</div></div>
+    <div class='protein'><label>たんぱく質</label><div><%=wants_protein * t%>g</div></div>
+    <div class='fat'><label>脂質</label><div><%=wants_fat * t %>g</div></div>
+    <div class='carbohydrate'><label>炭水化物</label><div><%=wants_carbohydrate * t %>g</div></div>
+  </div>
+  <div class="sum">
+    <div>【比較結果】</div>
+    <div class='calorie'><label>カロリー</label><div><%=sum_calorie - wants_calorie * t %>kcal</div></div>
+    <div class='protein'><label>たんぱく質</label><div><%=sum_protein - wants_protein * t%>g</div></div>
+    <div class='fat'><label>脂質</label><div><%=sum_fat - wants_fat * t %>g</div></div>
+    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate - wants_carbohydrate * t %>g</div></div>
+  </div>
+</div>
+
+
 
 <p>・減量を目指す場合</p>
 <p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>
