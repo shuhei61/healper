@@ -38,6 +38,19 @@ body {
   overflow: scroll;
 }
 
+.protein,.fat,.carbohydrate{
+  margin: 1px;
+  border: 1px solid orange;
+  background-color: rgb(251, 251, 230);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.protein{
+  border: 1px solid red;
+  background-color: rgb(246, 230, 230);
+}
+
 .plan-list {
   margin: 1vh 0;
 }
@@ -51,7 +64,6 @@ body {
 
 .lavel {
   font-size: 3vh;
-  color: rgb(255, 255, 255);
 }
 
 .text-input {

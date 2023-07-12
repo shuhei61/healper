@@ -23,11 +23,37 @@
       <% end %>
     <% end %>
     </ul>
+    <%# <div class='carolie'>
+      <% carolie = 0 %>
+      <%# <% day[:plans].each do |plan| %>
+        <%# <% carolie += plan.protein %>
+    <%# </div> %>
+    <div class='protein'>
+      <% protein = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% protein += plan.protein %>
+      <% end %>
+      <label>たんぱく質</label><div><%= protein %>g</div>
+    </div>
+    <div class='fat'>
+      <% fat = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% fat += plan.fat %>
+      <% end %>
+      <label>脂質</label><div><%= fat %>g</div>
+    </div>
+    <div class='carbohydrate'>
+      <% carbohydrate = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% carbohydrate += plan.carbohydrate %>
+      <% end %>
+      <label>炭水化物</label><div><%= carbohydrate %>g</div>
+    </div>
   </div>
   <% end %>
 </div>
 
-<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
+<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>kcalです。</h2>
 
 <p>・減量を目指す場合</p>
 <p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>

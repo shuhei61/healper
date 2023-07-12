@@ -26,24 +26,12 @@ class CalendarsController < ApplicationController
   def create_calendar
     params.require(:calendar).permit(:date, food_ids: []).merge(user_id: current_user.id)
   end
-  
-  # def move_to_index
-  #   unless current_user.id == @calendar.
-  #     redirect_to "/"
-  #   end
-  # end
-
-  # def move_to_session
-  #   unless user_signed_in?
-  #     redirect_to "/"
-  #   end
-  # end
 
   def get_week
     wdays = ['(日)','(月)','(火)','(水)','(木)','(金)','(土)']
 
-    @start_date = Date.today - 6.days
-    @end_date = Date.today
+    @start_date = Date.today - 3.days
+    @end_date = Date.today + 3.days
     @calendars = Calendar.where(date: @start_date..@end_date)
 
     @week_days = []
@@ -64,5 +52,17 @@ class CalendarsController < ApplicationController
     end
 
   end
+
+    # def move_to_index
+  #   unless current_user.id == @calendar.
+  #     redirect_to "/"
+  #   end
+  # end
+
+  # def move_to_session
+  #   unless user_signed_in?
+  #     redirect_to "/"
+  #   end
+  # end
 
 end
