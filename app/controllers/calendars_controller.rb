@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  include CalendarsHelper
   # before_action: move_to_session, only:[:new, :edit]
   # before_action: move_to_index, only:[:show, :edit, :destroy]
 
