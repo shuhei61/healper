@@ -18,7 +18,7 @@ body {
 }
 
 .tab-active {
-  background-color: #ddd;
+  background-color: rgb(172, 172, 255);
 }
 
 .tabbox-contents {
