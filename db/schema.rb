@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
   create_table "calendar_foods", charset: "utf8", force: :cascade do |t|
     t.bigint "calendar_id", null: false
     t.bigint "food_id", null: false
@@ -60,8 +60,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_085302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wants", charset: "utf8", force: :cascade do |t|
+    t.float "weight", null: false
+    t.integer "protein", null: false
+    t.integer "fat", null: false
+    t.integer "carbohydrate", null: false
+    t.float "diet_weight", null: false
+    t.integer "diet_protein", null: false
+    t.integer "diet_fat", null: false
+    t.integer "diet_carbohydrate", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wants_on_user_id"
+  end
+
   add_foreign_key "calendar_foods", "calendars"
   add_foreign_key "calendar_foods", "foods"
   add_foreign_key "calendars", "users"
   add_foreign_key "foods", "users"
+  add_foreign_key "wants", "users"
 end
