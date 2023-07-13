@@ -5,6 +5,36 @@ body {
   background-color: rgb(114, 151, 161);
 }
 
+.tab-list{
+  display: flex;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+.tab-active {
+  background-color: #ddd;
+}
+
+.tabbox-contents {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.tabbox {
+  display: none;
+}
+
+.box-show {
+  display: block;
+}
+
 .calendar {
   width: 100vw;
   margin-top: 15vh;

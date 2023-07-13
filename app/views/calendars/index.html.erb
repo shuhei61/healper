@@ -3,7 +3,7 @@
 <div><%= link_to "料理一覧はこちら","/foods" %></div>
 
 <h2>スケジュール</h2>
-<% wants_calorie = @user.essential_cal %>
+<% wants_calorie = 0 %>
 <% wants_protein = 0 %>
 <% wants_fat = 0 %>
 <% wants_carbohydrate = 0 %>
@@ -12,18 +12,22 @@
   <div class="wants-box">
     <div class="wants">
       <div><%= @user.nickname %>さんの、1日あたりの目安</div>
-      <div>通常</div>
-      <div class='calorie'><label>必須カロリー</label><div><%=@user.essential_cal %>kcal</div></div>
-      <div class='protein'><label>たんぱく質</label><div><%=(@user.essential_cal * 0.13 / 4).round %> ～ <%=(@user.essential_cal * 0.20 / 4).round %>g</div></div>
-      <div class='fat'><label>脂質</label><div><%=(@user.essential_cal * 0.2 / 9).round %> ～ <%=(@user.essential_cal * 0.3 / 9).round %>g</div></div>
-      <div class='carbohydrate'><label>炭水化物</label><div><%=(@user.essential_cal * 0.5 / 4).round %> ～ <%=(@user.essential_cal * 0.65 / 4).round %>g</div></div>
+      <ul class="tab-list list-unstyled">
+        <li class="tab tab-active">一般的な栄養バランス</li>
+        <li class="tab">ダイエットもしたい！</li>
+      </ul>
+      <div class="tabbox-contents">
+        <div class="tabbox box-show">
+          <%= render partial:"/shared/plan", locals:{user: @user}%>
+        </div>
+        <div class="tabbox">
+          <%= render partial:"/shared/diet_plan", locals:{user: @user}%>
+        </div>
+      </div>
+      
     </div>
     <div class="wants">
-      <div>ダイエット</div>
-      <div class='calorie'><label>必須カロリー</label><div><%=@user.essential_cal %>kcal</div></div>
-      <div class='protein'><label>たんぱく質</label><div><%=(@user.essential_cal * 0.13 / 4).round %> ～ <%=(@user.essential_cal * 0.20 / 4).round %>g</div></div>
-      <div class='fat'><label>脂質</label><div><%=(@user.essential_cal * 0.2 / 9).round %> ～ <%=(@user.essential_cal * 0.3 / 9).round %>g</div></div>
-      <div class='carbohydrate'><label>炭水化物</label><div><%=(@user.essential_cal * 0.5 / 4).round %> ～ <%=(@user.essential_cal * 0.65 / 4).round %>g</div></div>
+      <div>目標を決めてください</div>      
     </div>
   </div>
   <div>
