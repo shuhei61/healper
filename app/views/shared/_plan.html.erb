@@ -1,4 +1,5 @@
-<div class='calorie'><label>必須カロリー</label><div><%=user.essential_cal %>kcal</div><br></div>
-<div class='protein'><label>たんぱく質</label><div><%=(user.essential_cal * 0.13 / 4).round %> ～ <%=(user.essential_cal * 0.20 / 4).round %>g</div></div>
+<% protein_range = calc_protein(user.age, user.weight, user.level_id, user.essential_cal)%>
+<div class='calorie'><label>必須カロリー</label><div><%=user.essential_cal %>kcal</div><p>(体型維持に必要なカロリー)</p></div>
+<div class='protein'><label>たんぱく質</label><div><%=protein_range.min.round %> ～ <%=protein_range.max.round %>g</div></div>
 <div class='fat'><label>脂質</label><div><%=(user.essential_cal * 0.2 / 9).round %> ～ <%=(user.essential_cal * 0.3 / 9).round %>g</div></div>
 <div class='carbohydrate'><label>炭水化物</label><div><%=(user.essential_cal * 0.5 / 4).round %> ～ <%=(user.essential_cal * 0.65 / 4).round %>g</div></div>
