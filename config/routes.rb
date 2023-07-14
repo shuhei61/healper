@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   }
   resources :calendars
   resources :foods
+  resources :wants
 end

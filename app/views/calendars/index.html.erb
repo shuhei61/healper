@@ -1,45 +1,52 @@
 <% if user_signed_in? %>
-<div><%=link_to "料理の登録はこちら","/foods/new"%></div>
 <div><%= link_to "料理一覧はこちら","/foods" %></div>
-
-<h2>スケジュール</h2>
-<% wants_calorie = 0 %>
-<% wants_protein = 0 %>
-<% wants_fat = 0 %>
-<% wants_carbohydrate = 0 %>
 
 <div class="form">
   <div class="wants-box">
     <div class="wants">
-      <div><%= @user.nickname %>さんの、1日あたりの目安</div>
+      <div>【<%= @user.nickname %>さんの、1日あたりの目安】</div>
       <ul class="tab-list list-unstyled">
-        <li class="tab tab-active">一般的な栄養バランス</li>
-        <li class="tab">ダイエットもしたい！</li>
+        <li class="tab tab-active" data-target="tabbox-1">一般的な栄養バランス</li>
+        <li class="tab" data-target="tabbox-2">ダイエットもしたい！</li>
       </ul>
       <div class="tabbox-contents">
-        <div class="tabbox box-show">
+        <div class="tabbox box-show" id="tabbox-1">
           <%= render partial:"/shared/plan", locals:{user: @user}%>
         </div>
-        <div class="tabbox">
+        <div class="tabbox" id="tabbox-2">
           <%= render partial:"/shared/diet_plan", locals:{user: @user}%>
         </div>
       </div>
       
     </div>
     <div class="wants">
-      <div>目標を決めてください</div>      
+      <div>【目標を決めてください】</div>
+      <div>※特にこだわりなければそのままで。</div>
+      
+      <div class="tabbox box-show" id="tabbox-1">
+        <%= render partial:"/shared/deside", locals:{want: @want}%>
+      </div>
+      <div class="tabbox" id="tabbox-2">
+        <%= render partial:"/shared/deside_diet", locals:{want: @want}%>
+      </div>
+      
     </div>
   </div>
   <div>
+    <div>【その日の食事内容を登録してください】</div>
     <%= form_with( model: @calendar, local: true) do |f| %>
       <div>日付を選択
       <%= f.date_field :date, class: 'date-select' %></div>
       <div>食べた料理を選択</div>
-      <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true }) %></div>
+      <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw;' }) %></div>
       <div><%= f.submit '保存' %></div>
     <% end %>
+    <div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
   </div>
 </div>
+
+<h2>スケジュール</h2>
+
 <div class='calendar'>
   <% sum_calorie = 0 %>
   <% sum_protein = 0 %>
@@ -86,10 +93,10 @@
       <label>炭水化物</label><div><%= carbohydrate %>g</div>
     </div>
   </div>
-  <% sum_calorie += calorie %>
-  <% sum_protein += protein %>
-  <% sum_fat += fat %>
-  <% sum_carbohydrate += carbohydrate %>
+  <% sum_calorie = (sum_calorie + calorie).round %>
+  <% sum_protein = (sum_protein + protein).round %>
+  <% sum_fat = (sum_fat + fat).round %>
+  <% sum_carbohydrate = (sum_carbohydrate + carbohydrate).round %>
   <% end %>
 </div>
 
@@ -99,43 +106,18 @@
     <% t += 1 %>
   <% end %>
 <% end %>
-<div class="form">
-  <div class="sum">
-    <div>【<%= t %>日間の合計】</div>
-    <div class='calorie'><label>カロリー</label><div><%=sum_calorie %>kcal</div></div>
-    <div class='protein'><label>たんぱく質</label><div><%=sum_protein%>g</div></div>
-    <div class='fat'><label>脂質</label><div><%=sum_fat %>g</div></div>
-    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate %>g</div></div>
+
+<div class="tabbox box-show" id="tabbox-1">
+  <div class="form">
+    <%= render partial:"/shared/compare", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
   </div>
-  <div class="sum">
-    <div>【<%= t %>日間の目安】</div>
-    <div class='calorie'><label>カロリー</label><div><%=wants_calorie * t %>kcal</div></div>
-    <div class='protein'><label>たんぱく質</label><div><%=wants_protein * t%>g</div></div>
-    <div class='fat'><label>脂質</label><div><%=wants_fat * t %>g</div></div>
-    <div class='carbohydrate'><label>炭水化物</label><div><%=wants_carbohydrate * t %>g</div></div>
-  </div>
-  <div class="sum">
-    <div>【比較結果】</div>
-    <div class='calorie'><label>カロリー</label><div><%=sum_calorie - wants_calorie * t %>kcal</div></div>
-    <div class='protein'><label>たんぱく質</label><div><%=sum_protein - wants_protein * t%>g</div></div>
-    <div class='fat'><label>脂質</label><div><%=sum_fat - wants_fat * t %>g</div></div>
-    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate - wants_carbohydrate * t %>g</div></div>
+</div>
+<div class="tabbox" id="tabbox-2">
+  <div class="form">
+    <%= render partial:"/shared/compare_diet", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
   </div>
 </div>
 
-
-
-<p>・減量を目指す場合</p>
-<p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>
-<p>  週に0.5kgを目指す場合、週に3850kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 550 %>kcalに抑えましょう。</p>
-<p>  週に1kgを目指す場合、週に7700kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 1100 %>kcalに抑えましょう。</p>
-<p>※減量の場合、脂肪を落とすことがメインと考えると、1kgの脂肪=7700kcalのため。</p>
-<%# <p></p>
-<p>・増量を目指す場合</p>
-<p>一般的な目安として、週に0.25kgから0.5kg程度を目指すと良いでしょう。</p>
-<p>  週に0.25kgを目指す場合、週に3850kcal、一日当たり550kcal減らしましょう。</p>
-<p>  週に0.5kgを目指す場合、週に7700kcal、一日当たり1100kcal減らしましょう。</p>
-<p>※同じカロリーでも、タンパク質を優先して摂ると良いでしょう。</p> %>
 <% else %>
 <h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2>
 <% end %>

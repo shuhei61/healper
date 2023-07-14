@@ -1,0 +1,62 @@
+  <% wants_calorie = user.essential_cal - want.diet_weight * 1100 %>
+  <% wants_protein = want.diet_protein %>
+  <% wants_fat = want.diet_fat %>
+  <% wants_carbohydrate = want.diet_carbohydrate %>
+
+  <div class="sum">
+    <div>【目標】(<%= t %>日間)</div>
+    <div class='calorie'><label>カロリー</label><div><%=wants_calorie * t %>kcal</div></div>
+    <div class='protein'><label>たんぱく質</label><div><%=wants_protein * t%>g</div></div>
+    <div class='fat'><label>脂質</label><div><%=wants_fat * t %>g</div></div>
+    <div class='carbohydrate'><label>炭水化物</label><div><%=wants_carbohydrate * t %>g</div></div>
+  </div>
+  <div class="sum">
+    <div>【現状】(<%= t %>日間)</div>
+    <div class='calorie'><label>カロリー</label><div><%=sum_calorie %>kcal</div></div>
+    <div class='protein'><label>たんぱく質</label><div><%=sum_protein%>g</div></div>
+    <div class='fat'><label>脂質</label><div><%=sum_fat %>g</div></div>
+    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate %>g</div></div>
+  </div>
+  <div class="sum">
+    <div>【比較結果】</div>
+    <% compare_calorie = (sum_calorie - wants_calorie * t).round%>
+    <% compare_protein = (sum_protein - wants_protein * t).round%>
+    <% compare_fat = (sum_fat - wants_fat * t).round%>
+    <% compare_carbohydrate = (sum_carbohydrate - wants_carbohydrate * t).round%>
+    <div class='calorie'><label>カロリー</label>
+      <div>
+        <% if compare_calorie > 0 %>
+          <%= "+#{compare_calorie}kcal" %>
+        <% else %>
+          <%= compare_calorie %>kcal
+        <% end %>
+      </div>
+    </div>
+    <div class='protein'><label>たんぱく質</label>
+      <div>
+        <% if compare_protein > 0 %>
+          <%= "+#{compare_protein}g" %>
+        <% else %>
+          <%= compare_protein %>g
+        <% end %>
+      </div>
+    </div>
+    <div class='fat'><label>脂質</label>
+      <div>
+        <% if compare_fat > 0 %>
+          <%= "+#{compare_fat}g" %>
+        <% else %>
+          <%= compare_fat %>g
+        <% end %>
+      </div>
+    </div>
+    <div class='carbohydrate'><label>炭水化物</label>
+      <div>
+        <% if compare_carbohydrate > 0 %>
+          <%= "+#{compare_carbohydrate}g" %>
+        <% else %>
+          <%= compare_carbohydrate %>g
+        <% end %>
+      </div>
+    </div>
+  </div>

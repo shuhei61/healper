@@ -18,7 +18,7 @@ body {
 }
 
 .tab-active {
-  background-color: rgb(172, 172, 255);
+  background-color: rgb(170, 170, 248);
 }
 
 .tabbox-contents {
@@ -68,7 +68,7 @@ body {
   overflow: scroll;
 }
 
-.calorie,.protein,.fat,.carbohydrate{
+.calorie,.protein,.fat,.carbohydrate,.weight{
   margin: 1px;
   border: 1px solid orange;
   background-color: rgb(251, 251, 230);
@@ -86,6 +86,12 @@ body {
 .protein{
   border: 1px solid red;
   background-color: rgb(246, 230, 230);
+}
+
+.weight{
+  font-weight: 600;
+  border: 1px solid blue;
+  background-color: rgb(170, 170, 248);
 }
 
 .plan-list {
