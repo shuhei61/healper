@@ -9,6 +9,8 @@ class FoodsController < ApplicationController
 
   def create
     @food = Food.new(create_food)
+    calorie = (@food.protein*4 + @food.fat*9 + @food.carbohydrate*4).round
+    @food.calorie = calorie
     if @food.save
       redirect_to "/foods"      
     else

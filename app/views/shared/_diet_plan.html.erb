@@ -1,0 +1,4 @@
+<div class='calorie'><label>目標カロリー</label><div>例:<%=user.essential_cal - 550 %>kcal</div><div>( -550kcal )</div></div>
+<div class='protein'><label>たんぱく質</label><div><%=((user.weight * ( 1 - user.fat_body / 100 )) * 2).round %> ～ <%=((user.weight * ( 1 - user.fat_body / 100 )) * 3).round %>g</div></div>
+<div class='fat'><label>脂質</label><div><%=(user.essential_cal * 0.15 / 9).round %> ～ <%=(user.essential_cal * 0.2 / 9).round %>g</div></div>
+<div class='carbohydrate'><label>炭水化物</label><div>不足分のカロリー</div></div>

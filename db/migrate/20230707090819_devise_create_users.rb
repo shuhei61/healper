@@ -9,10 +9,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :encrypted_password, null: false, default: ""
       t.integer :gender_id, null: false
       t.integer :age, null: false
-      t.integer :height, null: false
-      t.integer :weight, null: false
+      t.float :height, null: false
+      t.float :weight, null: false
       t.integer :level_id, null: false
       t.integer :essential_cal, null: false
+      t.float :fat_body, null: false
 
       ## Recoverable
       t.string   :reset_password_token

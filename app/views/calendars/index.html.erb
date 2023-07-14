@@ -1,41 +1,179 @@
-<%= render partial:"shared/header"%>
-
 <% if user_signed_in? %>
-<div><%=link_to "料理の登録はこちら","/foods/new"%></div>
 <div><%= link_to "料理一覧はこちら","/foods" %></div>
 
-<h2>スケジュール</h2>
-<h2>あなたの一日の必須カロリーは<%= @user.essential_cal %>です。</h2>
-<div class="contents">
-  <% @calendars.each do |calendar|%>
-  <div class="content-box">
-    <div class="content-top">日付</div>
-    <div class="content-btm">内容
-      <div class="content-food">food1</div>
-      <div class="content-food">food2</div>
-      <div class="content-food">food3</div>
-      <div class="content-food">food4</div>
-      <div class="content-food">food5</div>
-      <div class="content-food">food6</div>
-      <div class="content-food">food7</div>
-      <div class="content-food">food8</div>
-      <div class="content-food">food9</div>
-      <div class="content-food">food10</div>
+<div class="form">
+  <div class="wants-box">
+    <div class="wants">
+      <div>【<%= @user.nickname %>さんの、1日あたりの目安】</div>
+      <ul class="tab-list list-unstyled">
+        <li class="tab tab-active" data-target="tabbox-1">一般的な栄養バランス</li>
+        <li class="tab" data-target="tabbox-2">ダイエットもしたい！</li>
+      </ul>
+      <div class="tabbox-contents">
+        <div class="tabbox box-show" id="tabbox-1">
+          <%= render partial:"/shared/plan", locals:{user: @user}%>
+        </div>
+        <div class="tabbox" id="tabbox-2">
+          <%= render partial:"/shared/diet_plan", locals:{user: @user}%>
+        </div>
+      </div>
+      
+    </div>
+    <div class="wants">
+      <div>【目標を決めてください】</div>
+      <div>※特にこだわりなければそのままで。</div>
+      
+      <div class="tabbox box-show" id="tabbox-1">
+        <%= render partial:"/shared/deside", locals:{want: @want}%>
+      </div>
+      <div class="tabbox" id="tabbox-2">
+        <%= render partial:"/shared/deside_diet", locals:{want: @want}%>
+      </div>
+      
     </div>
   </div>
+  <div>
+    <div>【その日の食事内容を登録してください】</div>
+    <%= form_with( model: @calendar, local: true) do |f| %>
+      <div>日付を選択
+      <%= f.date_field :date, class: 'date-select' %></div>
+      <div>食べた料理を選択</div>
+      <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw;' }) %></div>
+      <div><%= f.submit '保存' %></div>
+    <% end %>
+    <div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
+  </div>
+</div>
+
+<h2>スケジュール</h2>
+
+<div class='calendar'>
+  <% sum_calorie = 0 %>
+  <% sum_protein = 0 %>
+  <% sum_fat = 0 %>
+  <% sum_carbohydrate = 0 %>
+  <% @week_days.each do |day| %>
+  <div class='item'>
+    <div class='date'>
+      <%= day[:month] %>/<%= day[:date] %><%= day[:wday] %>
+    </div>
+    <ul class='content'>
+    <% if day[:plans].length != 0 %>
+      <% day[:plans].each do |plan| %>
+        <li class='plan-list'>・<%= plan.name %></li>
+      <% end %>
+    <% end %>
+    </ul>
+    <div class='calorie'>
+      <% calorie = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% calorie += plan.calorie %>
+      <% end %>
+      <div><%= calorie %>kcal</div>
+    </div>
+    <div class='protein'>
+      <% protein = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% protein += plan.protein %>
+      <% end %>
+      <label>たんぱく質</label><div><%= protein %>g</div>
+    </div>
+    <div class='fat'>
+      <% fat = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% fat += plan.fat %>
+      <% end %>
+      <label>脂質</label><div><%= fat %>g</div>
+    </div>
+    <div class='carbohydrate'>
+      <% carbohydrate = 0 %>
+      <% day[:plans].each do |plan| %>
+        <% carbohydrate += plan.carbohydrate %>
+      <% end %>
+      <label>炭水化物</label><div><%= carbohydrate %>g</div>
+    </div>
+  </div>
+  <% sum_calorie = (sum_calorie + calorie).round %>
+  <% sum_protein = (sum_protein + protein).round %>
+  <% sum_fat = (sum_fat + fat).round %>
+  <% sum_carbohydrate = (sum_carbohydrate + carbohydrate).round %>
   <% end %>
 </div>
-<p>・減量を目指す場合</p>
-<p>一般的な目安として、週に0.5kgから1kg程度を目指すと良いでしょう。</p>
-<p>  週に0.5kgを目指す場合、週に3850kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 550 %>kcalに抑えましょう。</p>
-<p>  週に1kgを目指す場合、週に7700kcal減らしたいので、一日の摂取カロリーは<%= @user.essential_cal - 1100 %>kcalに抑えましょう。</p>
-<p>※減量の場合、脂肪を落とすことがメインと考えると、1kgの脂肪=7700kcalのため。</p>
-<%# <p></p>
-<p>・増量を目指す場合</p>
-<p>一般的な目安として、週に0.25kgから0.5kg程度を目指すと良いでしょう。</p>
-<p>  週に0.25kgを目指す場合、週に3850kcal、一日当たり550kcal減らしましょう。</p>
-<p>  週に0.5kgを目指す場合、週に7700kcal、一日当たり1100kcal減らしましょう。</p>
-<p>※同じカロリーでも、タンパク質を優先して摂ると良いでしょう。</p> %>
+
+<% t = 0 %>
+<% @week_days.each do |day| %>
+  <% if day[:plans].length != 0%>
+    <% t += 1 %>
+  <% end %>
+<% end %>
+
+<div class="tabbox box-show" id="tabbox-1">
+  <div class="form">
+    <%= render partial:"/shared/compare", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
+  </div>
+</div>
+<div class="tabbox" id="tabbox-2">
+  <div class="form">
+    <%= render partial:"/shared/compare_diet", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
+  </div>
+</div>
+
 <% else %>
 <h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2>
 <% end %>
+
+<script>
+  const form_calc = ()=>{
+  const wants = <%= @want.to_json.html_safe %>;
+  const users = <%= @user.to_json.html_safe %>;
+  const protein_locate = document.getElementById("j-protein");
+  const fat_locate = document.getElementById("j-fat");
+  const carbohydrate_locate = document.getElementById("j-carbohydrate");
+  const carbohydrate_p_locate = document.getElementById("j-carbohydrate-p");
+  const diet_weight_locate = document.getElementById("j-diet_weight");
+  const diet_protein_locate = document.getElementById("j-diet_protein");
+  const diet_fat_locate = document.getElementById("j-diet_fat");
+  const diet_carbohydrate_locate = document.getElementById("j-diet_carbohydrate");
+  const diet_carbohydrate_p_locate = document.getElementById("j-diet_carbohydrate-p");
+  const essential_cal = Number(users.essential_cal);
+  var protein = Number(wants.protein);
+  var fat = Number(wants.fat);
+  var carbohydrate = Number(wants.carbohydrate);
+  carbohydrate_p_locate.innerHTML = carbohydrate + ' g';
+  var diet_weight = Number(wants.diet_weight);
+  var diet_protein = Number(wants.diet_protein);
+  var diet_fat = Number(wants.diet_fat);
+  var diet_carbohydrate = Number(wants.diet_carbohydrate);
+  diet_carbohydrate_p_locate.innerHTML = diet_carbohydrate + ' g';
+
+  function deside_calc(){
+    protein = Number(protein_locate.value);
+    fat = Number(fat_locate.value);
+    carbohydrate = Number(carbohydrate_locate.value);
+    carbohydrate = Math.round((essential_cal - protein * 4 - fat * 9) / 4);
+    console.log(carbohydrate);
+    carbohydrate_locate.value = carbohydrate;
+    carbohydrate_p_locate.innerHTML = carbohydrate + ' g';
+  };
+
+  function deside_diet_calc(){
+    diet_weight = Number(diet_weight_locate.value);
+    const diet_essential_cal = Math.round(essential_cal - diet_weight * 1100);
+    diet_protein = Number(diet_protein_locate.value);
+    diet_fat = Number(diet_fat_locate.value);
+    diet_carbohydrate = Number(diet_carbohydrate_locate.value);
+    diet_carbohydrate = Math.round((diet_essential_cal - diet_protein * 4 - diet_fat * 9) / 4);
+    console.log(diet_carbohydrate);
+    diet_carbohydrate_locate.value = diet_carbohydrate;
+    diet_carbohydrate_p_locate.innerHTML = diet_carbohydrate + ' g';
+  };
+  
+  protein_locate.addEventListener("input",deside_calc);
+  fat_locate.addEventListener("input",deside_calc);
+  diet_weight_locate.addEventListener("input",deside_diet_calc);
+  diet_protein_locate.addEventListener("input",deside_diet_calc);
+  diet_fat_locate.addEventListener("input",deside_diet_calc);
+};
+
+window.addEventListener("turbo:load",form_calc);
+</script>

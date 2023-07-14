@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_122525) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
+  create_table "calendar_foods", charset: "utf8", force: :cascade do |t|
+    t.bigint "calendar_id", null: false
+    t.bigint "food_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_calendar_foods_on_calendar_id"
+    t.index ["food_id"], name: "index_calendar_foods_on_food_id"
+  end
+
   create_table "calendars", charset: "utf8", force: :cascade do |t|
     t.date "date", null: false
     t.bigint "user_id", null: false
@@ -21,9 +30,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_122525) do
 
   create_table "foods", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "protein", null: false
-    t.integer "fat", null: false
-    t.integer "carbohydrate", null: false
+    t.float "protein", null: false
+    t.float "fat", null: false
+    t.float "carbohydrate", null: false
+    t.integer "calorie", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,10 +46,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_122525) do
     t.string "encrypted_password", default: "", null: false
     t.integer "gender_id", null: false
     t.integer "age", null: false
-    t.integer "height", null: false
-    t.integer "weight", null: false
+    t.float "height", null: false
+    t.float "weight", null: false
     t.integer "level_id", null: false
     t.integer "essential_cal", null: false
+    t.float "fat_body", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -49,6 +60,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_122525) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wants", charset: "utf8", force: :cascade do |t|
+    t.float "weight", null: false
+    t.integer "protein", null: false
+    t.integer "fat", null: false
+    t.integer "carbohydrate", null: false
+    t.float "diet_weight", null: false
+    t.integer "diet_protein", null: false
+    t.integer "diet_fat", null: false
+    t.integer "diet_carbohydrate", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wants_on_user_id"
+  end
+
+  add_foreign_key "calendar_foods", "calendars"
+  add_foreign_key "calendar_foods", "foods"
   add_foreign_key "calendars", "users"
   add_foreign_key "foods", "users"
+  add_foreign_key "wants", "users"
 end

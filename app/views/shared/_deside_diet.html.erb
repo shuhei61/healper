@@ -1,0 +1,20 @@
+<%= form_with( model: want, local: true) do |f| %>
+  <div class='weight'><div>減らしたい体重</div>
+  <div>(週に0.5kgから1kg程度が目安)</div>
+  <div><%= f.text_field :diet_weight, id:'j-diet_weight' %>kg</div></div>
+  <div class='protein'><div>たんぱく質</div>
+  <div>(優先的に摂ってください)</div>
+  <div><%= f.text_field :diet_protein, id:'j-diet_protein' %>g</div></div>
+  <div class='fat'><div>脂質</div>
+  <div>(30g以下に抑えることは難しいです)</div>
+  <div><%= f.text_field :diet_fat, id:'j-diet_fat' %>g</div></div>
+  <div class='carbohydrate'><div>炭水化物</div>
+  <div>(たんぱく質・脂質の値から自動計算)</div>
+  <div><span id='j-diet_carbohydrate-p'></span></div></div>
+  <%= f.hidden_field :diet_carbohydrate, id:'j-diet_carbohydrate' %>
+  <%= f.hidden_field :weight %>
+  <%= f.hidden_field :protein %>
+  <%= f.hidden_field :fat %>
+  <%= f.hidden_field :carbohydrate %>
+  <div><%= f.submit '更新' %></div>
+<% end %> 

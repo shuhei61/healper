@@ -1,0 +1,18 @@
+<%= form_with( model: want, local: true) do |f| %>
+  <%= f.hidden_field :weight %>
+  <div class='protein'><div>たんぱく質</div>
+  <div>(優先的に摂ってください)</div>
+  <div><%= f.text_field :protein, id:'j-protein' %>g</div></div>
+  <div class='fat'><div>脂質</div>
+  <div>(30g以下に抑えることは難しいです)</div>
+  <div><%= f.text_field :fat, id:'j-fat' %>g</div></div>
+  <div class='carbohydrate'><div>炭水化物</div>
+  <div>(たんぱく質・脂質の値から自動計算)</div>
+  <div><span id='j-carbohydrate-p'></div></div>
+  <%= f.hidden_field :carbohydrate, id:'j-carbohydrate' %>
+  <%= f.hidden_field :diet_weight %>
+  <%= f.hidden_field :diet_protein %>
+  <%= f.hidden_field :diet_fat %>
+  <%= f.hidden_field :diet_carbohydrate %>
+  <div><%= f.submit '更新' %></div>
+<% end %>
