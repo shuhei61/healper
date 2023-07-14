@@ -129,26 +129,51 @@
   const protein_locate = document.getElementById("j-protein");
   const fat_locate = document.getElementById("j-fat");
   const carbohydrate_locate = document.getElementById("j-carbohydrate");
+  const carbohydrate_p_locate = document.getElementById("j-carbohydrate-p");
   const diet_weight_locate = document.getElementById("j-diet_weight");
   const diet_protein_locate = document.getElementById("j-diet_protein");
   const diet_fat_locate = document.getElementById("j-diet_fat");
   const diet_carbohydrate_locate = document.getElementById("j-diet_carbohydrate");
-  var essential_cal = Number(users.essential_cal);
+  const diet_carbohydrate_p_locate = document.getElementById("j-diet_carbohydrate-p");
+  const essential_cal = Number(users.essential_cal);
   var protein = Number(wants.protein);
   var fat = Number(wants.fat);
   var carbohydrate = Number(wants.carbohydrate);
+  carbohydrate_p_locate.innerHTML = carbohydrate + ' g';
   var diet_weight = Number(wants.diet_weight);
   var diet_protein = Number(wants.diet_protein);
   var diet_fat = Number(wants.diet_fat);
   var diet_carbohydrate = Number(wants.diet_carbohydrate);
-  protein_locate.addEventListener("input",()=>{
+  diet_carbohydrate_p_locate.innerHTML = diet_carbohydrate + ' g';
+
+  function deside_calc(){
     protein = Number(protein_locate.value);
     fat = Number(fat_locate.value);
     carbohydrate = Number(carbohydrate_locate.value);
     carbohydrate = Math.round((essential_cal - protein * 4 - fat * 9) / 4);
     console.log(carbohydrate);
     carbohydrate_locate.value = carbohydrate;
-  });
+    carbohydrate_p_locate.innerHTML = carbohydrate + ' g';
+  };
+
+  function deside_diet_calc(){
+    diet_weight = Number(diet_weight_locate.value);
+    const diet_essential_cal = Math.round(essential_cal - diet_weight * 1100);
+    diet_protein = Number(diet_protein_locate.value);
+    diet_fat = Number(diet_fat_locate.value);
+    diet_carbohydrate = Number(diet_carbohydrate_locate.value);
+    diet_carbohydrate = Math.round((diet_essential_cal - diet_protein * 4 - diet_fat * 9) / 4);
+    console.log(diet_carbohydrate);
+    diet_carbohydrate_locate.value = diet_carbohydrate;
+    diet_carbohydrate_p_locate.innerHTML = diet_carbohydrate + ' g';
+  };
+  
+  protein_locate.addEventListener("input",deside_calc);
+  fat_locate.addEventListener("input",deside_calc);
+  diet_weight_locate.addEventListener("input",deside_diet_calc);
+  diet_protein_locate.addEventListener("input",deside_diet_calc);
+  diet_fat_locate.addEventListener("input",deside_diet_calc);
 };
+
 window.addEventListener("turbo:load",form_calc);
 </script>
