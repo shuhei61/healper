@@ -121,3 +121,34 @@
 <% else %>
 <h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2>
 <% end %>
+
+<script>
+  const form_calc = ()=>{
+  const wants = <%= @want.to_json.html_safe %>;
+  const users = <%= @user.to_json.html_safe %>;
+  const protein_locate = document.getElementById("j-protein");
+  const fat_locate = document.getElementById("j-fat");
+  const carbohydrate_locate = document.getElementById("j-carbohydrate");
+  const diet_weight_locate = document.getElementById("j-diet_weight");
+  const diet_protein_locate = document.getElementById("j-diet_protein");
+  const diet_fat_locate = document.getElementById("j-diet_fat");
+  const diet_carbohydrate_locate = document.getElementById("j-diet_carbohydrate");
+  var essential_cal = Number(users.essential_cal);
+  var protein = Number(wants.protein);
+  var fat = Number(wants.fat);
+  var carbohydrate = Number(wants.carbohydrate);
+  var diet_weight = Number(wants.diet_weight);
+  var diet_protein = Number(wants.diet_protein);
+  var diet_fat = Number(wants.diet_fat);
+  var diet_carbohydrate = Number(wants.diet_carbohydrate);
+  protein_locate.addEventListener("input",()=>{
+    protein = Number(protein_locate.value);
+    fat = Number(fat_locate.value);
+    carbohydrate = Number(carbohydrate_locate.value);
+    carbohydrate = Math.round((essential_cal - protein * 4 - fat * 9) / 4);
+    console.log(carbohydrate);
+    carbohydrate_locate.value = carbohydrate;
+  });
+};
+window.addEventListener("turbo:load",form_calc);
+</script>

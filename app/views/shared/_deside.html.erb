@@ -2,13 +2,13 @@
   <%= f.hidden_field :weight %>
   <div class='protein'><div>たんぱく質</div>
   <div>(優先的に摂ってください)</div>
-  <div><%= f.text_field :protein %>g</div></div>
+  <div><%= f.text_field :protein, id:'j-protein' %>g</div></div>
   <div class='fat'><div>脂質</div>
   <div>(30g以下に抑えることは難しいです)</div>
-  <div><%= f.text_field :fat %>g</div></div>
+  <div><%= f.text_field :fat, id:'j-fat' %>g</div></div>
   <div class='carbohydrate'><div>炭水化物　※入力不要</div>
   <div>(たんぱく質・脂質の値から自動計算)</div>
-  <div><%= f.text_field :carbohydrate %>g</div></div>
+  <div><%= f.text_field :carbohydrate, id:'j-carbohydrate'%>g</div></div>
   <%= f.hidden_field :diet_weight %>
   <%= f.hidden_field :diet_protein %>
   <%= f.hidden_field :diet_fat %>
