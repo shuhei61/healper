@@ -5,17 +5,21 @@
 
   <div class="sum">
     <div>【目標】(<%= t %>日間)</div>
-    <div class='calorie'><label>カロリー</label><div><%=wants_calorie * t %>kcal</div></div>
-    <div class='protein'><label>たんぱく質</label><div><%=wants_protein * t%>g</div></div>
-    <div class='fat'><label>脂質</label><div><%=wants_fat * t %>g</div></div>
-    <div class='carbohydrate'><label>炭水化物</label><div><%=wants_carbohydrate * t %>g</div></div>
+    <div class="tabbox-contents3">
+      <div class='calorie'><label>カロリー</label><div><%=wants_calorie * t %>kcal</div></div>
+      <div class='protein'><label>たんぱく質</label><div><%=wants_protein * t%>g</div></div>
+      <div class='fat'><label>脂質</label><div><%=wants_fat * t %>g</div></div>
+      <div class='carbohydrate'><label>炭水化物</label><div><%=wants_carbohydrate * t %>g</div></div>
+    </div>
   </div>
   <div class="sum">
-    <div>【現状】(<%= t %>日間)</div>
-    <div class='calorie'><label>カロリー</label><div><%=sum_calorie %>kcal</div></div>
-    <div class='protein'><label>たんぱく質</label><div><%=sum_protein%>g</div></div>
-    <div class='fat'><label>脂質</label><div><%=sum_fat %>g</div></div>
-    <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate %>g</div></div>
+    <div>【摂取合計】(<%= t %>日間)</div>7
+    <div class="tabbox-contents3">
+      <div class='calorie'><label>カロリー</label><div><%=sum_calorie %>kcal</div></div>
+      <div class='protein'><label>たんぱく質</label><div><%=sum_protein%>g</div></div>
+      <div class='fat'><label>脂質</label><div><%=sum_fat %>g</div></div>
+      <div class='carbohydrate'><label>炭水化物</label><div><%=sum_carbohydrate %>g</div></div>
+    </div>
   </div>
   <div class="sum">
     <div>【比較結果】</div>
@@ -23,6 +27,7 @@
     <% compare_protein = (sum_protein - wants_protein * t).round%>
     <% compare_fat = (sum_fat - wants_fat * t).round%>
     <% compare_carbohydrate = (sum_carbohydrate - wants_carbohydrate * t).round%>
+    <div class="tabbox-contents3">
     <div class='calorie'><label>カロリー</label>
       <div>
         <% if compare_calorie > 0 %>
@@ -59,4 +64,5 @@
         <% end %>
       </div>
     </div>
+  </div>
   </div>
