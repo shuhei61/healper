@@ -83,6 +83,25 @@ body {
   white-space: nowrap;
   overflow: scroll;
 }
+.plan-list{
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.more-list {
+  display: none;
+}
+
+.more-list a {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.plan-list:hover .more-list {
+  display: block;
+}
 
 .calorie,.protein,.fat,.carbohydrate,.weight{
   margin: 1px;

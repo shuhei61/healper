@@ -24,6 +24,12 @@ class CalendarsController < ApplicationController
   def show
   end
 
+  def destroy
+    @calendar = Calendar.find(params[:id])
+    @calendar.destroy
+    redirect_to request.referer
+  end
+
   private
   def create_calendar
     params.require(:calendar).permit(:date, food_ids: []).merge(user_id: current_user.id)
