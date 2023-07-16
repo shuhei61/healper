@@ -16,6 +16,6 @@ class WantsController < ApplicationController
   private
   
   def create_wants_params
-    params.require(:want).permit(:weight,:protein,:fat,:carbohydrate,:diet_weight,:diet_protein,:diet_fat,:diet_carbohydrate).merge(user_id:current_user.id)
+    params.require(:want).permit(:protein,:fat,:carbohydrate,:diet_weight,:diet_protein,:diet_fat,:diet_carbohydrate).merge(user_id:current_user.id)
   end
 end

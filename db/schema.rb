@@ -61,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
   end
 
   create_table "wants", charset: "utf8", force: :cascade do |t|
-    t.float "weight", null: false
     t.integer "protein", null: false
     t.integer "fat", null: false
     t.integer "carbohydrate", null: false
