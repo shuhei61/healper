@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-<div><%= link_to "料理一覧はこちら","/foods" %></div>
 
 <div class="form">
   <div class="wants-box">
@@ -20,29 +19,34 @@
       
     </div>
     <div class="wants">
-      <div>【目標を決めてください】</div>
-      <div>※特にこだわりなければそのままで。</div>
-      
-      <div class="tabbox box-show" id="tabbox-1">
-        <%= render partial:"/shared/deside", locals:{want: @want}%>
-      </div>
-      <div class="tabbox" id="tabbox-2">
-        <%= render partial:"/shared/deside_diet", locals:{want: @want}%>
+      <div>【目標設定】(こだわりあれば調整)</div>
+      <div class="tabbox-contents2">
+        <div class="tabbox box-show" id="tabbox-1">
+          <%= render partial:"/shared/deside", locals:{want: @want}%>
+        </div>
+        <div class="tabbox" id="tabbox-2">
+          <%= render partial:"/shared/deside_diet", locals:{want: @want}%>
+        </div>
       </div>
       
     </div>
+
+    <div class="wants">
+      <div>【食事内容を登録】</div>
+      <div class="tabbox-contents2">
+        <%= form_with( model: @calendar, local: true) do |f| %>
+          <div>日付を選択
+          <%= f.date_field :date, class: 'date-select' %></div>
+          <div>食べた料理を選択</div>
+          <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 280px;' }) %></div>
+          <div><%= f.submit '保存' %></div>
+        <% end %>
+      </div>
+      <div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
+      <div><%= link_to "料理一覧はこちら","/foods" %></div>
+    </div>
   </div>
-  <div>
-    <div>【その日の食事内容を登録してください】</div>
-    <%= form_with( model: @calendar, local: true) do |f| %>
-      <div>日付を選択
-      <%= f.date_field :date, class: 'date-select' %></div>
-      <div>食べた料理を選択</div>
-      <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw;' }) %></div>
-      <div><%= f.submit '保存' %></div>
-    <% end %>
-    <div><%=link_to "料理の登録はこちらから","/foods/new"%></div>
-  </div>
+    
 </div>
 
 <h2>スケジュール</h2>
@@ -109,12 +113,16 @@
 
 <div class="tabbox box-show" id="tabbox-1">
   <div class="form">
+    <div class="wants-box">
     <%= render partial:"/shared/compare", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
+    </div>
   </div>
 </div>
 <div class="tabbox" id="tabbox-2">
   <div class="form">
+    <div class="wants-box">
     <%= render partial:"/shared/compare_diet", locals:{user: @user, want: @want, t: t, sum_calorie: sum_calorie, sum_protein: sum_protein, sum_fat: sum_fat, sum_carbohydrate: sum_carbohydrate}%>
+    </div>
   </div>
 </div>
 
