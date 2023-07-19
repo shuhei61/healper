@@ -1,3 +1,22 @@
-<% @foods.each do |food| %>
-<div><%=link_to food.name,"/foods/#{food.id}"%></div>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>食品名</th>
+      <th>カロリー</th>
+      <th>タンパク質</th>
+      <th>脂質</th>
+      <th>炭水化物</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= link_to food.name, "/foods/#{food.id}" %></td>
+        <td><%= link_to food.calorie %></td>
+        <td><%= link_to food.protein %></td>
+        <td><%= link_to food.fat %></td>
+        <td><%= link_to food.carbohydrate %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

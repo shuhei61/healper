@@ -1,0 +1,33 @@
+  /* テーブル全体のスタイル */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px; /* テーブルの幅を調整する場合は適宜調整してください */
+    margin: 20px auto; /* テーブルを中央寄せするためのマージン */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* テーブルに影を追加 */
+  }
+
+  /* ヘッダー行のスタイル */
+  th {
+    background-color: #f9a825; /* 背景色をポップな色に設定 */
+    color: white; /* テキストの色を白に設定 */
+    padding: 12px; /* セルのパディング */
+    text-align: center; /* テキストを中央寄せ */
+  }
+
+  /* データ行のスタイル */
+  td {
+    padding: 8px; /* セルのパディング */
+    text-align: center; /* テキストを中央寄せ */
+    border-bottom: 1px solid #f9a825; /* データ行の下部にボーダーを追加 */
+  }
+
+  /* 最後の行の下部ボーダーを非表示にする */
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ホバー時の背景色を設定 */
+  tr:hover {
+    background-color: #fafafa; /* ホバー時の背景色を薄いグレーに設定 */
+  }
