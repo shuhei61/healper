@@ -12,10 +12,10 @@
     <% @foods.each do |food| %>
       <tr>
         <td><%= link_to food.name, "/foods/#{food.id}" %></td>
-        <td><%= link_to food.calorie %></td>
-        <td><%= link_to food.protein %></td>
-        <td><%= link_to food.fat %></td>
-        <td><%= link_to food.carbohydrate %></td>
+        <td><%= link_to food.calorie, "/foods/#{food.id}" %></td>
+        <td><%= link_to food.protein, "/foods/#{food.id}" %></td>
+        <td><%= link_to food.fat, "/foods/#{food.id}" %></td>
+        <td><%= link_to food.carbohydrate, "/foods/#{food.id}" %></td>
       </tr>
     <% end %>
   </tbody>
