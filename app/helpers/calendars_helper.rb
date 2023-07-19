@@ -57,7 +57,7 @@ module CalendarsHelper
     7.times do |x|
       today_plans = []
       @calendars.each do |calendar|
-        today_plans.push(*calendar.foods) if calendar.date == @start_date + x
+        today_plans.push(*calendar.calendar_foods.map { |cf| { food: cf.food, calendar_id: cf.calendar_id } }) if calendar.date == @start_date + x
       end
 
       wday_num = @start_date.wday + x

@@ -65,8 +65,8 @@
     <% if day[:plans].length != 0 %>
       <% day[:plans].each do |plan| %>
         <li class='plan-list'>
-          ■<%= plan.name %>
-          <%= link_to '削除', calendar_path(plan.id), class:"more-list", data: { turbo_method: :delete } %>
+          ■<%= plan[:food].name %>
+          <%= link_to '削除', calendar_path(plan[:calendar_id]), class:"more-list", data: { turbo_method: :delete } %>
         </li>
       <% end %>
     <% end %>
@@ -74,28 +74,28 @@
     <div class='calorie'>
       <% calorie = 0 %>
       <% day[:plans].each do |plan| %>
-        <% calorie += plan.calorie %>
+        <% calorie += plan[:food].calorie %>
       <% end %>
       <div><%= calorie %>kcal</div>
     </div>
     <div class='protein'>
       <% protein = 0 %>
       <% day[:plans].each do |plan| %>
-        <% protein += plan.protein %>
+        <% protein += plan[:food].protein %>
       <% end %>
       <label>たんぱく質</label><div><%= protein %>g</div>
     </div>
     <div class='fat'>
       <% fat = 0 %>
       <% day[:plans].each do |plan| %>
-        <% fat += plan.fat %>
+        <% fat += plan[:food].fat %>
       <% end %>
       <label>脂質</label><div><%= fat %>g</div>
     </div>
     <div class='carbohydrate'>
       <% carbohydrate = 0 %>
       <% day[:plans].each do |plan| %>
-        <% carbohydrate += plan.carbohydrate %>
+        <% carbohydrate += plan[:food].carbohydrate %>
       <% end %>
       <label>炭水化物</label><div><%= carbohydrate %>g</div>
     </div>

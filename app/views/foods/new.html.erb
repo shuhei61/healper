@@ -1,3 +1,10 @@
-<%= render partial:"/shared/food_new", locals:{food: @food}%>
+<div class="main">
+  <div class="inner">
+    <div class="form__wrapper">
+      <h2 class="page-heading">料理データ登録</h2>
+         <%= render partial:"/shared/new_form", locals:{food: @food}%>
+      <div class="field"><%= link_to "料理一覧に戻る","/foods" %></div>
+    </div>
+  </div>
+</div>
 
-<div><%= link_to "料理一覧に戻る","/foods" %></div>

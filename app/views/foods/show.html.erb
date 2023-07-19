@@ -1,12 +1,42 @@
-<h2><%=@food.name%></h2>
-<div>
-  <%= link_to "編集する","/foods/#{@food.id}/edit" %>
-  <%= link_to "削除する","/foods/#{@food.id}", data:{turbo_method: :delete} %>
-</div>
-
-<h3>カロリー：<%=@food.calorie %> kcal</h3>
-<div>たんぱく質：<%=@food.protein%> g</div>
-<div>脂質　　　：<%=@food.fat%> g</div>
-<div>炭水化物　：<%=@food.carbohydrate%> g</div>
-
-<div><%= link_to "料理一覧に戻る","/foods" %></div>
+<main class="main">
+  <div class="inner">
+    <div class="show__wrapper">
+      <p class="show__hedding">
+        <%= @food.name%>
+      </p>
+      <%if user_signed_in? && current_user.id == @food.user_id %>
+        <div class="show__manage">
+          <%= link_to "編集する", "/foods/#{@food.id}/edit", class: :show__btn %>
+          <%= link_to "削除する", "/foods/#{@food.id}", data: { turbo_method: :delete }, class: :show__btn %>
+        </div>
+      <%end%>
+      <div class="show__body">
+        <div class="show__detail">
+          <p class="detail__title">カロリー</p>
+          <p class="detail__message">
+            <%= @food.calorie %> kcal
+          </p>
+        </div>
+        <div class="show__detail">
+          <p class="detail__title">たんぱく質</p>
+          <p class="detail__message">
+            <%= @food.protein%> g
+          </p>
+        </div>
+        <div class="show__detail">
+          <p class="detail__title">脂質</p>
+          <p class="detail__message">
+            <%= @food.fat%> g
+          </p>
+        </div>
+        <div class="show__detail">
+          <p class="detail__title">炭水化物</p>
+          <p class="detail__message">
+            <%= @food.carbohydrate%> g
+          </p>
+        </div>
+      </div>
+    <div class="text_center"><%= link_to "料理一覧に戻る","/foods" %></div>
+    </div>
+  </div>
+</main>
