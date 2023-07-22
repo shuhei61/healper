@@ -29,5 +29,10 @@ class PreFood < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
+  has_many :calendar_pre_foods
+
+  def calendars
+    calendar_pre_foods.map(&:calendar)
+  end
 
   end
