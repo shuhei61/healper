@@ -43,7 +43,7 @@
             <li class="food_tab" data-target="food_tabbox-2">オリジナル</li>
           </ul>
           <div class="food_tabbox box-show" id="food_tabbox-1"><%= f.collection_select(:pre_food_ids, PreFood.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 270px;' }) %></div>
-          <div class="food_tabbox box" id="tabbox-2"><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 270px;' }) %></div>
+          <div class="food_tabbox box" id="food_tabbox-2"><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 270px;' }) %></div>
           <div><%= f.submit '保存' %></div>
         <% end %>
       </div>
@@ -67,6 +67,14 @@
       <%= day[:month] %>/<%= day[:date] %><%= day[:wday] %>
     </div>
     <ul class='content'>
+    <% if day[:pre_plans].length != 0 %>
+      <% day[:pre_plans].each do |plan| %>
+        <li class='plan-list'>
+          ■<%= plan[:pre_food].name %>
+          <%= link_to '削除', calendar_path(plan[:calendar_id]), class:"more-list", data: { turbo_method: :delete } %>
+        </li>
+      <% end %>
+    <% end %>
     <% if day[:plans].length != 0 %>
       <% day[:plans].each do |plan| %>
         <li class='plan-list'>

@@ -56,8 +56,10 @@ module CalendarsHelper
 
     7.times do |x|
       today_plans = []
+      today_pre_plans = []
       @calendars.each do |calendar|
         today_plans.push(*calendar.calendar_foods.map { |cf| { food: cf.food, calendar_id: cf.calendar_id } }) if calendar.date == @start_date + x
+        today_pre_plans.push(*calendar.calendar_pre_foods.map { |cf| { pre_food: cf.pre_food, calendar_id: cf.calendar_id } }) if calendar.date == @start_date + x
       end
 
       wday_num = @start_date.wday + x
@@ -65,7 +67,7 @@ module CalendarsHelper
         wday_num = wday_num - 7
       end
 
-      days = { month: (@start_date + x).month, date: (@start_date+x).day, plans: today_plans, wday: wdays[wday_num]}
+      days = { month: (@start_date + x).month, date: (@start_date+x).day, plans: today_plans, pre_plans: today_pre_plans, wday: wdays[wday_num]}
       @week_days.push(days)
     end
 
