@@ -5,8 +5,4 @@ class Calendar < ApplicationRecord
   has_many :foods, through: :calendar_foods
   has_many :pre_foods, through: :calendar_pre_foods
 
-  def pre_foods
-    calendar_pre_foods.map(&:pre_food)
-  end
-
 end

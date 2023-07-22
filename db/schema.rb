@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_121219) do
   create_table "calendar_foods", charset: "utf8", force: :cascade do |t|
     t.bigint "calendar_id", null: false
     t.bigint "food_id", null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
     t.datetime "updated_at", null: false
     t.index ["calendar_id"], name: "index_calendar_foods_on_calendar_id"
     t.index ["food_id"], name: "index_calendar_foods_on_food_id"
+  end
+
+  create_table "calendar_pre_foods", charset: "utf8", force: :cascade do |t|
+    t.bigint "calendar_id", null: false
+    t.bigint "pre_food_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_calendar_pre_foods_on_calendar_id"
+    t.index ["pre_food_id"], name: "index_calendar_pre_foods_on_pre_food_id"
   end
 
   create_table "calendars", charset: "utf8", force: :cascade do |t|
@@ -38,6 +47,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
+  end
+
+  create_table "pre_foods", charset: "utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.float "protein", null: false
+    t.float "fat", null: false
+    t.float "carbohydrate", null: false
+    t.integer "calorie", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -76,6 +95,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_033042) do
 
   add_foreign_key "calendar_foods", "calendars"
   add_foreign_key "calendar_foods", "foods"
+  add_foreign_key "calendar_pre_foods", "calendars"
+  add_foreign_key "calendar_pre_foods", "pre_foods"
   add_foreign_key "calendars", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "wants", "users"
