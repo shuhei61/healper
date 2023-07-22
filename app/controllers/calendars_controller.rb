@@ -32,7 +32,7 @@ class CalendarsController < ApplicationController
 
   private
   def create_calendar
-    params.require(:calendar).permit(:date, food_ids: []).merge(user_id: current_user.id)
+    params.require(:calendar).permit(:date, food_ids: [], pre_food_ids: []).merge(user_id: current_user.id)
   end
 
     # def move_to_index
