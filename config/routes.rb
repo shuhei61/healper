@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'custom_registrations'
   }
-  resources :calendars
+  resources :calendars do
+    resources :calendar_foods, only:[:destroy]
+    resources :calendar_pre_foods, only:[:destroy]
+  end
   resources :foods
   resources :wants
+  
 end

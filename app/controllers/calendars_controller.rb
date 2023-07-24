@@ -5,10 +5,10 @@ class CalendarsController < ApplicationController
 
   def index
     if user_signed_in?
-      get_week
       @user = User.find(current_user.id)
       @want = Want.find_by(user_id:@user.id)
       @calendar = Calendar.new
+      get_week
     end
   end
 

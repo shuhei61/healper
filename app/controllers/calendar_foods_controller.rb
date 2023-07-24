@@ -1,0 +1,2 @@
+class CalendarFoodsController < ApplicationController
+end

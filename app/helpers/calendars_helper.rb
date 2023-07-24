@@ -50,7 +50,7 @@ module CalendarsHelper
 
     @start_date = Date.today - 3.days
     @end_date = Date.today + 3.days
-    @calendars = Calendar.where(date: @start_date..@end_date)
+    @calendars = Calendar.where(user_id: current_user.id, date: @start_date..@end_date)
 
     @week_days = []
 
