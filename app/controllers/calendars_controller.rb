@@ -5,10 +5,10 @@ class CalendarsController < ApplicationController
 
   def index
     if user_signed_in?
-      get_week
       @user = User.find(current_user.id)
       @want = Want.find_by(user_id:@user.id)
       @calendar = Calendar.new
+      get_week
     end
   end
 
@@ -32,7 +32,7 @@ class CalendarsController < ApplicationController
 
   private
   def create_calendar
-    params.require(:calendar).permit(:date, food_ids: []).merge(user_id: current_user.id)
+    params.require(:calendar).permit(:date, food_ids: [], pre_food_ids: []).merge(user_id: current_user.id)
   end
 
     # def move_to_index

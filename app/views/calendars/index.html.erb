@@ -38,7 +38,12 @@
           <div>日付を選択
           <%= f.date_field :date, class: 'date-select' %></div>
           <div>食べた料理を選択</div>
-          <div><%= f.collection_select(:food_ids, Food.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 280px;' }) %></div>
+          <ul class="food_tab-list list-unstyled">
+            <li class="food_tab tab-active" data-target="food_tabbox-1">プリセット</li>
+            <li class="food_tab" data-target="food_tabbox-2">オリジナル</li>
+          </ul>
+          <div class="food_tabbox box-show" id="food_tabbox-1"><%= f.collection_select(:pre_food_ids, PreFood.all, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 270px;' }) %></div>
+          <div class="food_tabbox box" id="food_tabbox-2"><%= f.collection_select(:food_ids, current_user.foods, :id, :name, { include_blank: false }, { multiple: true, style: 'width: 22vw; height: 270px;' }) %></div>
           <div><%= f.submit '保存' %></div>
         <% end %>
       </div>
@@ -62,6 +67,14 @@
       <%= day[:month] %>/<%= day[:date] %><%= day[:wday] %>
     </div>
     <ul class='content'>
+    <% if day[:pre_plans].length != 0 %>
+      <% day[:pre_plans].each do |plan| %>
+        <li class='plan-list'>
+          ■<%= plan[:pre_food].name %>
+          <%= link_to '削除', calendar_calendar_pre_food_path(calendar_id: plan[:calendar_id], id: plan[:pre_food].id), class:"more-list", data: { turbo_method: :delete } %>
+        </li>
+      <% end %>
+    <% end %>
     <% if day[:plans].length != 0 %>
       <% day[:plans].each do |plan| %>
         <li class='plan-list'>

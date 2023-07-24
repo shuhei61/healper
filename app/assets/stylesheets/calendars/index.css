@@ -10,9 +10,22 @@ body {
   height:60px;
 }
 
+.food_tab-list{
+  display: flex;
+  height:30px;
+}
+
 .tab {
   cursor: pointer;
   padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+.food_tab {
+  cursor: pointer;
+  padding: 2px;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-bottom: none;
@@ -45,6 +58,10 @@ body {
 }
 
 .tabbox {
+  display: none;
+}
+
+.food_tabbox {
   display: none;
 }
 
