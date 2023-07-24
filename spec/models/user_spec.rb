@@ -116,7 +116,7 @@ RSpec.describe User, type: :model do
       it '必須カロリーは整数以外では登録できない' do
         @user.essential_cal = '1989.5'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Essential must be an integer")
+        expect(@user.errors.full_messages).to include("Essential cal must be an integer")
       end
       it '体脂肪率が必須であること' do
         @user.fat_body = ''
