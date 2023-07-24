@@ -1,5 +1,7 @@
 class Calendar < ApplicationRecord
 
+  validates :date, presence: true
+
   has_many :calendar_foods, dependent: :destroy
   has_many :calendar_pre_foods, dependent: :destroy
   has_many :foods, through: :calendar_foods
@@ -10,5 +12,7 @@ class Calendar < ApplicationRecord
       destroy
     end
   end
+
+  belongs_to :user
 
 end
