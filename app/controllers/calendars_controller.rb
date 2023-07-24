@@ -25,9 +25,6 @@ class CalendarsController < ApplicationController
   end
 
   def destroy
-    @calendar = Calendar.find(params[:id])
-    @calendar.destroy
-    redirect_to request.referer
   end
 
   private
