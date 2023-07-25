@@ -126,9 +126,9 @@
     </div>
   </div>
   <% sum_calorie = (sum_calorie + calorie).round %>
-  <% sum_protein = (sum_protein + protein).round %>
-  <% sum_fat = (sum_fat + fat).round %>
-  <% sum_carbohydrate = (sum_carbohydrate + carbohydrate).round %>
+  <% sum_protein = (sum_protein + protein).round(1) %>
+  <% sum_fat = (sum_fat + fat).round(1) %>
+  <% sum_carbohydrate = (sum_carbohydrate + carbohydrate).round(1) %>
   <% end %>
 </div>
 
@@ -138,7 +138,6 @@
     <% t += 1 %>
   <% end %>
 <% end %>
-
 <div class="tabbox box-show" id="tabbox-1">
   <div class="form">
     <div class="wants-box">
@@ -155,7 +154,10 @@
 </div>
 
 <% else %>
-<h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2>
+<div class="center-box">
+<h2>ユーザー登録をして、あなたの一日の必須カロリーを確認しましょう。</h2><br>
+<%= video_tag("/images/healper-use.mp4", controls: true, size: "800x390") %>
+</div>
 <% end %>
 
 <script>

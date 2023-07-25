@@ -26,3 +26,8 @@
    tr:hover {
     background-color: #fafafa; 
   }
+
+.center-box{
+  width:800px;
+  margin: 0 auto;
+}
