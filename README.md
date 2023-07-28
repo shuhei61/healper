@@ -1,55 +1,51 @@
 # README
 
-## usersテーブル
-| Column             | Type       | Options                        |
-|--------------------|------------|--------------------------------|
-| nickname           | string     | null: false                    |
-| email              | string     | null: false, unique: true      |
-| encrypted_password | string     | null: false                    |
-| gender_id          | integer    | null: false                    |
-| age                | integer    | null: false                    |
-| height             | integer    | null: false                    |
-| weight             | integer    | null: false                    |
-| level_id           | integer    | null: false                    |
-| essential_cal      | integer    | null: false                    |
+## アプリケーション名
+Healper
+## アプリケーション概要
+栄養管理を行うことができるアプリです。
+主な機能は、ユーザー登録機能、カレンダー登録機能およびカロリーと栄養素の自動計算機能です。
+## URL
+https://healper-mwqp.onrender.com
+## テスト用アカウント
+mail：taro@mail.com
+pass：one111
+## 利用方法
+ユーザー登録をすると、登録された情報をもとに必須カロリーや栄養素を自動計算し、目標が定められます。
+トップページにアクセスすると、必須カロリーや栄養素の目安が確認できます。
+その日の食事内容を登録することで、カレンダーに反映されます。
+## アプリケーションを作成した背景
+30代になると身体に衰えを感じ始めるとの話を聞いたことがあり、健康を維持するためには栄養管理を行うべきだと感じました。
 
-### Association
-- has_many :calendars
-- has_many :foods
-- extend ActiveHash::Associations::ActiveRecordExtensions
--   belongs_to :gender
--   belongs_to :level
+年齢・性別・身長・体重などから、健康に必要なカロリーや栄養素はある程度計算できますが、簡単に計算できるものでもなく、また料理に含まれる栄養もそれぞれ調べる必要があり、始めるための第一歩が困難だと感じました。また、現在ある栄養素チェッカーなどは細かすぎて全てを考慮しきれないことと、日々の記録ができない点も課題に感じました。
 
-## foodsテーブル
-| Column             | Type       | Options                        |
-|--------------------|------------|--------------------------------|
-| name               | string     | null: false                    |
-| protein            | integer    | null: false                    |
-| fat                | integer    | null: false                    |
-| carbohydrate       | integer    | null: false                    |
-| user               | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user
-- has_many :calendars, through: :calender_foods
-- has_one_attached :image
-
-## calendarsテーブル
-| Column             | Type       | Options                        |
-|--------------------|------------|--------------------------------|
-| date               | date       | null: false                    |
-| user               | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user
-- has_many :foods, through: :calender_foods
-
-## calendar_foodsテーブル
-| Column             | Type       | Options                        |
-|--------------------|------------|--------------------------------|
-| calendar           | references | null: false, foreign_key: true |
-| food               | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :calendar
-- belongs_to :food
+そこで、
+- 情報を登録するだけで必須カロリーや栄養素を自動で定める
+- ユーザーはその日何を食べたかを登録するだけで、摂取量が分かる
+そのようなアプリを作成したいと考えました。
+## 洗い出した要件
+要件定義シート
+https://docs.google.com/spreadsheets/d/1PcYMUguzOxGkUlzyA8-ck3t4rtwjCM1pgTun4g49RsY/edit#gid=982722306
+## 実装した機能についての画像やGIFおよびその説明
+https://github.com/shuhei61/healper/assets/135288191/ec4216c6-9a9f-4df3-a867-2d1852dc719c
+## 実装予定の機能
+- カレンダー一覧ページの表示期間変更機能
+- カレンダー詳細ページ
+- ユーザー情報編集ページ
+## データベース設計
+![healper_ER](https://github.com/shuhei61/healper/assets/135288191/c8c9146b-d694-4aa4-b8a5-f5d1112e6ff2)
+## 画面遷移図
+![画面遷移図](https://github.com/shuhei61/healper/assets/135288191/da1030f9-cc7f-451e-8b2d-4b1617b4b38e)
+## 開発環境
+Ruby / Ruby on Rails / MySQL / GitHub / Render / Visual Studio Code
+## ローカルでの動作方法
+% git clone https://github.com/shuhei61/healper.git
+% cd healper
+% bundle install
+## 工夫したポイント
+ユーザーの手間が少なくなるように各種機能を考えました。
+## 改善点
+- カレンダーの表示期間を自分で変えることができない。
+- ユーザー情報（体重など）が変わった際に変更できない。
+## 制作時間
+120時間
