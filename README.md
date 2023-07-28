@@ -40,8 +40,9 @@ https://github.com/shuhei61/healper/assets/135288191/ec4216c6-9a9f-4df3-a867-2d1
 ## 開発環境
 Ruby / Ruby on Rails / MySQL / GitHub / Render / Visual Studio Code
 ## ローカルでの動作方法
-% git clone https://github.com/shuhei61/healper.git
-% cd healper
+以下のコマンドを順に実行<br>
+% git clone https://github.com/shuhei61/healper.git<br>
+% cd healper<br>
 % bundle install
 ## 工夫したポイント
 ユーザーの手間が少なくなるように各種機能を考えました。
