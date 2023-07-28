@@ -8,7 +8,7 @@ Healper
 ## URL
 https://healper-mwqp.onrender.com
 ## テスト用アカウント
-mail：taro@mail.com
+mail：taro@mail.com<br>
 pass：one111
 ## 利用方法
 ユーザー登録をすると、登録された情報をもとに必須カロリーや栄養素を自動計算し、目標が定められます。<br>
